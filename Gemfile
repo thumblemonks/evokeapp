@@ -4,4 +4,10 @@ gem "rails", "2.3.5"
 
 gem "haml"
 
+#
+# Test
+
+gem "riot", :git => "git://github.com/thumblemonks/riot.git"
+gem "riot_rails", :git => "git://github.com/thumblemonks/riot_rails.git"
+
 disable_system_gems
