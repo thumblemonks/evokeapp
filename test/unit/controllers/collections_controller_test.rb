@@ -6,8 +6,8 @@ rails_context CollectionsController do
 
   hookup do
     topic.resource = Class.new do
-      def self.find(scope, options)
-        Collection.new(:name => "foo") if options[:conditions][:name] == "foo"
+      def self.[](name)
+        Collection.new if name == "foo"
       end
     end
   end
