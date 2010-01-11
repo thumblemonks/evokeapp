@@ -9,6 +9,6 @@ module ResourcefulController
 
 private
   def default_resource
-    self.class.name.gsub(/Controller$/, '').constantize
+    self.class.name.gsub(/Controller$/, '').singularize.constantize
   end
 end

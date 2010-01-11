@@ -3,10 +3,10 @@ require 'teststrap'
 context "A resourceful controller" do
   setup do
     ResourcefulFoo = Class.new {}
-    ResourcefulFooController = Class.new do
+    ResourcefulFoosController = Class.new do
       include ResourcefulController
     end
-    ResourcefulFooController.new
+    ResourcefulFoosController.new
   end
 
   asserts_topic.responds_to(:resource)
