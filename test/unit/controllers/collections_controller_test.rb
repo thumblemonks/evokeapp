@@ -6,9 +6,8 @@ rails_context CollectionsController do
 
   hookup do
     topic.resource = Class.new do
-      def self.[](name)
-        Collection.new if name == "foo"
-      end
+      def self.all; [Collection.new, Collection.new]; end
+      def self.[](name) Collection.new if name == "foo"; end
     end
   end
 
@@ -19,7 +18,6 @@ rails_context CollectionsController do
 
     asserts_controller.response_code :ok
     asserts_controller.renders_template :show
-
     asserts_controller.assigns(:collection)
   end # showing an existing collection
 
@@ -31,5 +29,15 @@ rails_context CollectionsController do
     asserts_controller.renders ''
     asserts_controller.response_code :not_found
   end # showing a non-existent collection
+
+  context "index of all collections" do
+    setup do
+      get :index
+    end
+
+    asserts_controller.renders_template 'index'
+    asserts_controller.response_code :ok
+    asserts_assigned(:collections).size(2)
+  end # index of all collections
 
 end # CollectionsController
