@@ -4,6 +4,8 @@ gem "rails", "2.3.5"
 
 gem "haml"
 gem "sqlite3-ruby"
+# gem "mongoid" # http://mongoid.org
+# gem "mongo_ext"
 
 #
 # Test

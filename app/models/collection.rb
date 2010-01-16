@@ -4,4 +4,10 @@ class Collection < ActiveRecord::Base
   def self.[](name)
     find(:first, :conditions => {:name => name})
   end
+
+  def json_options; {:only => [:name]}; end
+  
+  def to_json(options={})
+    super(json_options.merge(options))
+  end
 end
