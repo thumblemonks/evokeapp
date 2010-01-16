@@ -12,33 +12,27 @@ rails_context CollectionsController do
   end
 
   context "request for an existing collection" do
-    setup do
-      get :show, :id => "foo"
-    end
+    hookup { get :show, :id => "foo" }
 
-    asserts_controller.response_code :ok
-    asserts_controller.renders({:name => "foo"}.to_json)
+    asserts_response(:content_type).equals('application/json')
+    asserts_response.code :ok
+    asserts_response.renders({:name => "foo"}.to_json)
   end # showing an existing collection
 
   context "request for a non-existent collection" do
-    setup do
-      get :show, :id => "bar"
-    end
+    hookup { get :show, :id => "bar" }
 
-    asserts_controller.renders({:message => "Collection not found"}.to_json)
-    asserts_controller.response_code :not_found
+    asserts_response(:content_type).equals('application/json')
+    asserts_response.renders({:message => "Collection not found"}.to_json)
+    asserts_response.code :not_found
   end # showing a non-existent collection
 
   context "request for index of all collections" do
-    setup do
-      get :index
-    end
+    hookup { get :index }
 
-    # TODO: asserts_response.content_type 'application/json'
-    asserts_controller.response_code :ok
-    asserts_controller.renders do
-      [{:name => "baz"}, {:name => "boo"}].to_json
-    end
+    asserts_response(:content_type).equals('application/json')
+    asserts_response.code :ok
+    asserts_response.renders { [{:name => "baz"}, {:name => "boo"}].to_json }
   end # index of all collections
 
 end # CollectionsController
